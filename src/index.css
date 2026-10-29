@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #F5F2EC;
+    color: #0B1F1A;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', serif;
+  }
+}
+
+@layer components {
+  .btn-gold {
+    @apply bg-[#C9A24B] text-[#0B1F1A] font-semibold tracking-widest text-xs uppercase px-6 py-3 transition-all duration-300 hover:bg-[#B8902F] hover:shadow-lg;
+  }
+
+  .btn-gold-outline {
+    @apply border border-[#C9A24B] text-[#C9A24B] font-semibold tracking-widest text-xs uppercase px-6 py-3 transition-all duration-300 hover:bg-[#C9A24B] hover:text-[#0B1F1A];
+  }
+
+  .btn-wa {
+    @apply bg-[#25D366] text-white font-semibold tracking-widest text-xs uppercase px-6 py-3 transition-all duration-300 hover:bg-[#1FB855] hover:shadow-lg;
+  }
+
+  .section-label {
+    @apply text-[#C9A24B] text-xs font-semibold tracking-[0.3em] uppercase font-['Montserrat'];
+  }
+
+  .section-heading {
+    @apply font-['Cormorant_Garamond'] font-semibold leading-tight;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #06120F;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9A24B;
+  border-radius: 3px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #C9A24B;
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
