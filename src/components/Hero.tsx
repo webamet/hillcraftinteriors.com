@@ -80,7 +80,7 @@ export default function Hero() {
           <div className="flex flex-col items-center justify-center text-center animate-fade-up" style={{ animationDelay: '0.35s' }}>
             <div className="w-52 h-60 sm:w-60 sm:h-72 lg:w-64 lg:h-80 flex items-end justify-center border border-white/15 bg-black/10 backdrop-blur-sm overflow-hidden">
               <img
-                src="/assets/images/WhatsApp_Image_2026-10-10_at_11.06.41_AM-removebg-preview.png"
+                src="/assets/images/jocob.png"
                 alt="Hillcraft Interiors representative"
                 className="w-full h-full object-contain object-bottom"
               />

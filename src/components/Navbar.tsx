@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Phone, Menu, X, MessageCircle } from 'lucide-react';
-import { PHONE_URL, WHATSAPP_URL, LOGO_PATH } from '../data/products';
+import { PHONE_URL, WHATSAPP_URL } from '../data/products';
 
 const NAV_LINKS = [
   { label: 'Home', href: '#home' },
@@ -13,6 +13,8 @@ const NAV_LINKS = [
   { label: 'Contact', href: '#contact' },
 ];
 
+const LOGO_PATH = '/assets/images/logo.jpeg';
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,6 +24,7 @@ export default function Navbar() {
     const onScroll = () => {
       setScrolled(window.scrollY > 30);
       const ids = NAV_LINKS.map((l) => l.href.replace('#', ''));
+
       for (const id of [...ids].reverse()) {
         const el = document.getElementById(id);
         if (el && window.scrollY >= el.offsetTop - 140) {
@@ -30,28 +33,41 @@ export default function Navbar() {
         }
       }
     };
+
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const handleNav = (href: string) => {
     setMenuOpen(false);
-    document.getElementById(href.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(href.replace('#', ''))?.scrollIntoView({
+      behavior: 'smooth',
+    });
   };
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'bg-[#0B1F1A] shadow-2xl shadow-black/40 py-0' : 'bg-transparent py-2'
+        scrolled
+          ? 'bg-[#0B1F1A] shadow-2xl shadow-black/40 py-0'
+          : 'bg-transparent py-2'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-20 lg:h-24">
-          <button onClick={() => handleNav('#home')} className="flex-shrink-0 flex items-center gap-3">
+
+          <button
+            onClick={() => handleNav('#home')}
+            className="flex-shrink-0 flex items-center gap-3"
+          >
             <img
               src={LOGO_PATH}
               alt="Hillcraft Interiors Tuensang (HIT) Logo"
               className="h-14 lg:h-16 w-auto object-contain"
+              onError={(e) => {
+                console.error('Logo failed to load:', LOGO_PATH);
+                e.currentTarget.style.display = 'none';
+              }}
             />
           </button>
 
@@ -72,20 +88,24 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
-            <a
-              href={PHONE_URL}
-              className="btn-gold flex items-center gap-2"
-            >
+            <a href={PHONE_URL} className="btn-gold flex items-center gap-2">
               <Phone size={14} />
               Call Now
             </a>
           </div>
 
           <div className="flex lg:hidden items-center gap-2">
-            <a href={PHONE_URL} className="w-9 h-9 bg-[#C9A24B] flex items-center justify-center rounded-sm">
+            <a
+              href={PHONE_URL}
+              className="w-9 h-9 bg-[#C9A24B] flex items-center justify-center rounded-sm"
+            >
               <Phone size={16} className="text-[#0B1F1A]" />
             </a>
-            <button onClick={() => setMenuOpen(!menuOpen)} className="text-white p-1">
+
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="text-white p-1"
+            >
               {menuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -104,6 +124,7 @@ export default function Navbar() {
                 {label}
               </button>
             ))}
+
             <a
               href={WHATSAPP_URL}
               target="_blank"
